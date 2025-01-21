@@ -1,4 +1,4 @@
-package com.microservice.student.user.permits;
+package com.microservice.student.permits.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

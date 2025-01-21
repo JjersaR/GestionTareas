@@ -1,9 +1,10 @@
-package com.microservice.student.user.roles;
+package com.microservice.student.roles.model;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import com.microservice.student.user.permits.Permit;
+import com.microservice.student.permits.model.Permit;
+import com.microservice.student.roles.ERole;
 
 import jakarta.persistence.*;
 import lombok.Getter;

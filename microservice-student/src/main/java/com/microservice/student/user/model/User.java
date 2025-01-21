@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.microservice.student.user.roles.Role;
+import com.microservice.student.roles.Role;
 
 import jakarta.persistence.*;
 import lombok.Getter;
