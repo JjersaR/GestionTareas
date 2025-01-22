@@ -17,6 +17,8 @@ public interface IUserRepository extends JpaRepository<User, Long> {
   // Find user by email
   Optional<User> findByEmail(String email);
 
+  Optional<User> findByName(String name);
+
   // update user
   @Query(value = """
       UPDATE User u SET u.name = COALESCE(:#{#user.name}, u.name), u.password = COALESCE(:#{#user.password}, u.password), u.email = COALESCE(:#{#user.email}, u.email)
