@@ -17,6 +17,13 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
+security:
+  jwt:
+    key:
+      private: 8b575f54e3d16cec96df1ab19cb3a01cd6ec1e78c511e495a11e25fb61948efc
+    user:
+      generator: JjersaR-BACKEND
+
 eureka:
   instance:
     hostname: localhost
