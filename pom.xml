@@ -22,6 +22,7 @@
     <module>microservice-config</module>
     <module>microservice-user</module>
     <module>microservice-project</module>
+    <module>microservice-task</module>
   </modules>
 
   <properties>

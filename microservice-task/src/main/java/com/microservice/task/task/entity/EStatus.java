@@ -1,0 +1,23 @@
+package com.microservice.task.task.entity;
+
+public enum EStatus {
+  IN_PLANNING,
+  IN_SETUP,
+  INACTIVE,
+  NOT_STARTED,
+  APPROVED,
+  CONFIRMED,
+  PENDING,
+  READY,
+  ACTIVE,
+  IN_DEVELOPMENT,
+  IN_PROGRESS,
+  IN_TESTING,
+  STARTED,
+  BLOCKED,
+  CANCELED,
+  SUSPENDED,
+  TERMINATED,
+  COMPLETED,
+  DONE
+}

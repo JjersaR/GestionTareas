@@ -24,6 +24,6 @@ public interface IProjectRepository extends JpaRepository<Project, Long> {
   // update project
   @Transactional
   @Modifying
-  @Query("UPDATE Project p SET p.name = COALESCE(:#{#proj.name}, p.name), p.description = COALESCE(:#{#proj.description}, p.description), p.status = COALESCE(:#{#proj.status}, p.status)")
+  @Query("UPDATE Project p SET p.name = COALESCE(:#{#proj.name}, p.name), p.description = COALESCE(:#{#proj.description}, p.description), p.status = COALESCE(:#{#proj.status}, p.status) WHERE p.id = :#{#proj.id}")
   void update(Project proj);
 }
