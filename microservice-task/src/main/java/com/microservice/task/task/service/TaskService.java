@@ -24,6 +24,11 @@ public class TaskService {
     return (tasks.isEmpty()) ? null : tasks;
   }
 
+  public List<Task> findByTaskId(Long id) {
+    var tasks = repository.findByTaskId(id);
+    return (tasks.isEmpty()) ? null : tasks;
+  }
+
   public void save(Task task) {
     repository.save(task);
   }

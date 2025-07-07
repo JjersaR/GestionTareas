@@ -23,4 +23,6 @@ public interface ITaskRepository extends JpaRepository<Task, Long> {
   @Modifying
   @Query("UPDATE Task t SET t.description = COALESCE(:#{#task.description}, t.description), t.status = COALESCE(:#{#task.status}, t.status), t.taskId = COALESCE(:#{#task.taskId}, t.taskId) WHERE t.id = :#{#task.id}")
   void update(Task task);
+
+  List<Task> findByTaskId(Long id);
 }

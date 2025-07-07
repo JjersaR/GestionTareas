@@ -49,7 +49,7 @@ public class UserController {
   @PostMapping
   public ResponseEntity<?> saveUser(@RequestBody User user) throws URISyntaxException {
     service.save(user);
-    return ResponseEntity.created(new URI("api/user")).build();
+    return ResponseEntity.created(new URI("/api/user")).build();
   }
 
   @PutMapping

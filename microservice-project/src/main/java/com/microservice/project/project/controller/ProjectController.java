@@ -26,7 +26,7 @@ public class ProjectController {
 
   @GetMapping("/by")
   public ResponseEntity<?> getProject(@RequestParam(required = false, name = "user") Long idUser,
-      @RequestParam(required = false, name = "project") Long idProject) {
+      @RequestParam(required = false, name = "id") Long idProject) {
 
     if (idUser != null) {
       var byUser = service.findByUserId(idUser);
@@ -43,7 +43,7 @@ public class ProjectController {
   @PostMapping
   public ResponseEntity<?> save(@RequestBody Project project) throws URISyntaxException {
     service.save(project);
-    return ResponseEntity.created(new URI("api/project")).build();
+    return ResponseEntity.created(new URI("/api/project")).build();
   }
 
   @PutMapping
