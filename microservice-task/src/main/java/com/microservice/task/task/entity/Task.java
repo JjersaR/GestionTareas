@@ -13,7 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 @Entity
 public class Task {
@@ -32,7 +34,7 @@ public class Task {
 
   @Column(nullable = false, length = 15)
   @Enumerated(EnumType.STRING)
-  private EStatus status = EStatus.PENDING;
+  private EStatus status;
 
   @CreationTimestamp
   @Column(columnDefinition = "", nullable = false, updatable = false)
@@ -41,4 +43,21 @@ public class Task {
   @UpdateTimestamp
   @Column(columnDefinition = "", nullable = false)
   private LocalDateTime updatedAt;
+
+  // to update
+  public Task(Long id, String description, Long taskId, EStatus status) {
+    this.id = id;
+    this.description = description;
+    this.taskId = taskId;
+    this.status = status;
+  }
+
+  // to save
+  public Task(String description, Long createdBy, Long projectId, Long taskId, EStatus status) {
+    this.description = description;
+    this.createdBy = createdBy;
+    this.projectId = projectId;
+    this.taskId = taskId;
+    this.status = status;
+  }
 }

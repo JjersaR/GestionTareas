@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.microservice.user.user.dto.UserRequest;
+import com.microservice.user.user.dto.UserUpdate;
 import com.microservice.user.user.entity.User;
 import com.microservice.user.user.service.UserService;
 
@@ -47,14 +50,15 @@ public class UserController {
   }
 
   @PostMapping
-  public ResponseEntity<?> saveUser(@RequestBody User user) throws URISyntaxException {
+  public ResponseEntity<?> saveUser(@RequestBody @Validated UserRequest userRequest) throws URISyntaxException {
+    var user = User.builder().name(userRequest.getName()).email(userRequest.getEmail()).build();
     service.save(user);
     return ResponseEntity.created(new URI("/api/user")).build();
   }
 
   @PutMapping
-  public ResponseEntity<?> updateUser(@RequestParam Long id, @RequestBody User user) {
-    user.setId(id);
+  public ResponseEntity<?> updateUser(@RequestParam Long id, @RequestBody @Validated UserUpdate userUpdate) {
+    var user = User.builder().id(id).name(userUpdate.getName()).email(userUpdate.getEmail()).build();
     service.update(user);
     return ResponseEntity.ok().build();
   }

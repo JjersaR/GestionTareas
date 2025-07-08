@@ -1,10 +1,12 @@
 package com.microservice.user.user.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.microservice.user.user.dto.UserDTO;
 import com.microservice.user.user.entity.User;
 import com.microservice.user.user.repository.IUserRepository;
 
@@ -14,25 +16,35 @@ public class UserService {
   @Autowired
   private IUserRepository repository;
 
+  // Método auxiliar para convertir User -> UserDTO
+  private UserDTO convertToDto(User user) {
+    return new UserDTO(user.getId(), user.getName(), user.getEmail(), user.getCreatedAt());
+  }
+
   // List all users
-  public List<User> findAll() {
-    return repository.findAll();
+  public List<UserDTO> findAll() {
+    var users = repository.findAll();
+    return users.stream().map(this::convertToDto).collect(Collectors.toList());
   }
 
   // Show user by id
-  public User findById(Long id) {
+  public UserDTO findById(Long id) {
     var userOp = repository.findById(id);
     if (!userOp.isEmpty()) {
-      return userOp.get();
+      var user = userOp.get();
+
+      return convertToDto(user);
     }
     return null;
   }
 
   // show user by email
-  public User findByEmail(String email) {
+  public UserDTO findByEmail(String email) {
     var userOp = repository.findByEmail(email);
     if (!userOp.isEmpty()) {
-      return userOp.get();
+      var user = userOp.get();
+
+      return convertToDto(user);
     }
     return null;
   }

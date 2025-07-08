@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.microservice.project.project.entity.Project;
+import com.microservice.project.project.dto.ProjectRequest;
+import com.microservice.project.project.dto.ProjectUpdate;
 import com.microservice.project.project.service.ProjectService;
 
 @RestController
@@ -41,13 +42,13 @@ public class ProjectController {
   }
 
   @PostMapping
-  public ResponseEntity<?> save(@RequestBody Project project) throws URISyntaxException {
-    service.save(project);
+  public ResponseEntity<?> save(@RequestBody ProjectRequest request) throws URISyntaxException {
+    service.save(request);
     return ResponseEntity.created(new URI("/api/project")).build();
   }
 
   @PutMapping
-  public ResponseEntity<?> update(@RequestParam Long id, @RequestBody Project project) {
+  public ResponseEntity<?> update(@RequestParam Long id, @RequestBody ProjectUpdate project) {
     project.setId(id);
     service.update(project);
     return ResponseEntity.ok().build();
