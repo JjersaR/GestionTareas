@@ -18,15 +18,19 @@ Este microservicio permite gestionar **usuarios**, **proyectos**, y **tareas**, 
 
 ```json
 POST http://localhost:8080/api/user
+```
+
+**Body:**
+``` json
 {
   "name": "User",
   "email": "user@gmail.com"
 }
 ```
 ```
+```
 
 ---
-
 ### 🔍 Obtener usuario
 
 Por ID:
