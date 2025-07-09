@@ -27,8 +27,6 @@ POST http://localhost:8080/api/user
   "email": "user@gmail.com"
 }
 ```
-```
-```
 
 ---
 ### 🔍 Obtener usuario
