@@ -1,0 +1,100 @@
+version: '3.9'
+
+services:
+  msvc-config:
+    build:
+      context: .
+      dockerfile: microservice-config/Dockerfile
+    ports:
+      - "8888:8888"
+    networks:
+      - gestionTareasNet
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mysql:
+    image: mysql:oraclelinux9
+    container_name: gestiontareasBD
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://gestiontareasBD:3306/GestionTareas
+      MYSQL_ROOT_PASSWORD: 271631126
+      MYSQL_DATABASE: GestionTareas
+    ports:
+      - "3306:3306"
+    networks:
+      - gestionTareasNet
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  msvc-eureka:
+    build:
+      context: .
+      dockerfile: microservice-eureka/Dockerfile
+    depends_on:
+      msvc-config:
+        condition: service_healthy
+    ports:
+      - "8761:8761"
+    networks:
+      - gestionTareasNet
+
+  msvc-user:
+    build:
+      context: .
+      dockerfile: microservice-user/Dockerfile
+    depends_on:
+      - msvc-config
+      - mysql
+      - msvc-eureka
+    ports:
+      - "8090:8090"
+    networks:
+      - gestionTareasNet
+
+  msvc-project:
+    build:
+      context: .
+      dockerfile: microservice-project/Dockerfile
+    depends_on:
+      - msvc-config
+      - mysql
+      - msvc-eureka
+    ports:
+      - "8091:8091"
+    networks:
+      - gestionTareasNet
+
+  msvc-task:
+    build:
+      context: .
+      dockerfile: microservice-task/Dockerfile
+    depends_on:
+      - msvc-config
+      - mysql
+      - msvc-eureka
+    ports:
+      - "8092:8092"
+    networks:
+      - gestionTareasNet
+
+  msvc-gateway:
+    build:
+      context: .
+      dockerfile: microservice-gateway/Dockerfile
+    depends_on:
+      - msvc-user
+      - msvc-project
+      - msvc-task
+    ports:
+      - "8080:8080"
+    networks:
+      - gestionTareasNet
+
+networks:
+  gestionTareasNet:
+
+volumes:
+  mysql-data:

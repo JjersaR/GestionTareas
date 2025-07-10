@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.microservice.project.client.dto.UserDTO;
 
-@FeignClient(name = "msvc-user", url = "localhost:8080/api/user")
+@FeignClient(name = "msvc-user", url = "msvc-gateway:8080/api/user")
 public interface IUserClient {
 
   @GetMapping("/by")

@@ -6,6 +6,7 @@
     <groupId>com.mycompany.app</groupId>
     <artifactId>GestionTareas</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
 	</parent>
 	<groupId>com.microservice.project</groupId>
 	<artifactId>microservice-project</artifactId>

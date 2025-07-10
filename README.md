@@ -4,6 +4,22 @@ Este microservicio permite gestionar **usuarios**, **proyectos**, y **tareas**, 
 
 ---
 
+## Cómo ejecutar el proyecto?
+
+1.- Al clonar el repositorio en la carpeta de GestionTareas ejecutar el siguiente comando:
+
+``` bash
+mvn clean package -DskipTests
+```
+
+2.- Ya hecho el paso 1 ejecutar el siguiente comando:
+
+``` bash
+sudo docker compose up --build
+```
+
+---
+
 ## 🌐 Base URLs
 
 - Usuarios: `http://localhost:8080/api/user`
